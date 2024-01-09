@@ -32,18 +32,31 @@ function App() {
       return
     }
 
-    const result = await determineWinner(selectedChoicePlayerOne, selectedChoicePlayerTwo)
+    try {
+      const result = await determineWinner(selectedChoicePlayerOne, selectedChoicePlayerTwo)
 
-    const modal = await Swal.fire({
-      title: `${result.winner} venceu!`,
-      text: result.message,
-      confirmButtonText: 'Jogar novamente'
-    })
-
-    if (modal.isConfirmed || modal.isDismissed) {
-      setSelectedChoicePlayerOne(null);
-      setSelectedChoicePlayerTwo(null);
-    }
+      const modal = await Swal.fire({
+        title: `${result.winner} venceu!`,
+        text: result.message,
+        confirmButtonText: 'Jogar novamente'
+      })
+  
+      if (modal.isConfirmed || modal.isDismissed) {
+        setSelectedChoicePlayerOne(null);
+        setSelectedChoicePlayerTwo(null);
+      }
+    } catch (err) {
+      Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+      }).fire({
+        icon: "error",
+        title: "Erro de comunicação com o servidor."
+      });
+      return
+    }    
   }
 
   return (
