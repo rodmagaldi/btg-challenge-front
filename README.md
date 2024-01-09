@@ -6,6 +6,11 @@ Foi implementada uma aplicação simples em uma única página, com um jogo de [
 
 Os dois jogadores jogam na mesma tela, e a comunicação com a API retorna o resultado do jogo.
 
+Para instalar a dependências:
+```bash
+$ yarn
+```
+
 Para rodar a aplicação em desenvolvimento, basta:
 
 ```bash
